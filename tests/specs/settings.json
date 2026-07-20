@@ -1,19 +1,24 @@
 [
   {
-    "name": "/settings",
+    "name": "/settings opens the settings menu",
     "steps": [
       {
+        "send": { "text": "/settings" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Открыть настройки пользователя"
-            }
+            "payload": { "text": "⚙️ Choose a setting:" }
           }
-        ],
-        "send": {
-          "text": "/settings"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "the Settings button on main menu shows the same menu",
+    "steps": [
+      {
+        "send": { "callback": "settings:show" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }
