@@ -1,19 +1,15 @@
 [
   {
-    "name": "Свободный текст",
+    "name": "/text prompts user for text input",
     "steps": [
       {
+        "send": { "text": "/text" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Отправить свободный текст для основной функции бота"
-            }
+            "payload": { "text": "Введите текст:" }
           }
-        ],
-        "send": {
-          "text": "/text"
-        }
+        ]
       }
     ]
   }

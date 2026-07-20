@@ -1,15 +1,12 @@
 import { Composer } from "grammy";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-
 const composer = new Composer();
 
 composer.command("about", async (ctx) => {
-  await ctx.reply("Показать информацию о боте");
+  await ctx.reply(
+    "ℹ️ Литвин — Telegram-бот с дружелюбным интерфейсом для выполнения неуточненной основной функции.\n\n" +
+      "Используйте /start, чтобы открыть меню, и выберите, что вы хотите, из кнопок.",
+  );
 });
 
 export default composer;

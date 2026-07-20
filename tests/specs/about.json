@@ -1,19 +1,17 @@
 [
   {
-    "name": "/about",
+    "name": "/about explains the bot",
     "steps": [
       {
+        "send": { "text": "/about" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Показать информацию о боте"
+              "text": "ℹ️ Литвин — Telegram-бот с дружелюбным интерфейсом для выполнения неуточненной основной функции.\n\nИспользуйте /start, чтобы открыть меню, и выберите, что вы хотите, из кнопок."
             }
           }
-        ],
-        "send": {
-          "text": "/about"
-        }
+        ]
       }
     ]
   }
