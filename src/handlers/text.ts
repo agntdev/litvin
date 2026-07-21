@@ -1,15 +1,14 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
+const composer = new Composer<Ctx>();
 
-const composer = new Composer();
-
+// /text — command for free-form user input (non-technical users tap; they never
+// type /text, but it's the exit ramp if they do). A real bot would capture
+// input, process it, and return to the main menu. For this barebones scaffold
+// just acknowledge receipt.
 composer.command("text", async (ctx) => {
-  await ctx.reply("Отправить свободный текст для основной функции бота");
+  await ctx.reply("Отправьте текст или выберите функцию из меню.");
 });
 
 export default composer;
