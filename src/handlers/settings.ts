@@ -1,15 +1,22 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { mainMenuKeyboard, registerMainMenuItem } from "../toolkit/index.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
+// Adds a button to the /start main menu: `menu:settings`.
+registerMainMenuItem({ label: "⚙️ Settings", data: "menu:settings", order: 40 });
 
-const composer = new Composer();
+const SETTINGS = "⚙️ Настройки пользователя";
+
+const composer = new Composer<Ctx>();
 
 composer.command("settings", async (ctx) => {
-  await ctx.reply("Открыть настройки пользователя");
+  await ctx.reply(SETTINGS, { reply_markup: mainMenuKeyboard() });
+});
+
+// Also reachable by the menu button — same text, same menu.
+composer.callbackQuery("menu:settings", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  await ctx.editMessageText(SETTINGS, { reply_markup: mainMenuKeyboard() });
 });
 
 export default composer;

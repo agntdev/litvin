@@ -3,17 +3,26 @@
     "name": "/settings",
     "steps": [
       {
+        "send": { "text": "/settings" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Открыть настройки пользователя"
+              "text": "⚙️ Настройки пользователя"
             }
           }
-        ],
-        "send": {
-          "text": "/settings"
-        }
+        ]
+      },
+      {
+        "send": { "callback": "menu:settings" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "⚙️ Настройки пользователя"
+            }
+          }
+        ]
       }
     ]
   }

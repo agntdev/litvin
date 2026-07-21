@@ -1,15 +1,24 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { mainMenuKeyboard, registerMainMenuItem } from "../toolkit/index.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
+// Adds a button to the /start main menu: `menu:about`.
+registerMainMenuItem({ label: "ℹ️ About", data: "menu:about", order: 30 });
 
-const composer = new Composer();
+const ABOUT =
+  "ℹ️ Литвин — дружелюбный Telegram-бот с простым интерфейсом.\n\n" +
+  "Нажимайте кнопки, чтобы управлять ботом — не нужно запоминать команды.";
+
+const composer = new Composer<Ctx>();
 
 composer.command("about", async (ctx) => {
-  await ctx.reply("Показать информацию о боте");
+  await ctx.reply(ABOUT, { reply_markup: mainMenuKeyboard() });
+});
+
+// Also reachable by the menu button — same text, same menu.
+composer.callbackQuery("menu:about", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  await ctx.editMessageText(ABOUT, { reply_markup: mainMenuKeyboard() });
 });
 
 export default composer;
